@@ -4,39 +4,46 @@ import com.pazbelloso.factura_springboot.models.dao.IClienteDao;
 import com.pazbelloso.factura_springboot.models.entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Pageable;
+
 import java.util.List;
 
 @Service
-public class ClienteServiceImpl implements ClienteService{
+public class ClienteServiceImpl implements IClienteService {
 
     @Autowired
     private IClienteDao clienteDao;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Cliente> findAll() {
-        return null;
+        return (List<Cliente>) clienteDao.findAll();
     }
 
     @Override
     public Page<Cliente> findAll(Pageable pageable) {
-        return null;
+        return clienteDao.findAll(pageable);
     }
 
     @Override
+    @Transactional
     public void save(Cliente cliente) {
         clienteDao.save(cliente);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Cliente findOne(Long id) {
-        return null;
+        return clienteDao.findById(id).orElse(null);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
+        clienteDao.deleteById(id);
 
     }
 }
