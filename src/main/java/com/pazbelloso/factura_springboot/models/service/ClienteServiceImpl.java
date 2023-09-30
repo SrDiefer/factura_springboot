@@ -2,6 +2,8 @@ package com.pazbelloso.factura_springboot.models.service;
 
 import com.pazbelloso.factura_springboot.models.dao.IClienteDao;
 import com.pazbelloso.factura_springboot.models.entity.Cliente;
+import com.pazbelloso.factura_springboot.models.entity.Factura;
+import com.pazbelloso.factura_springboot.models.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,5 +47,25 @@ public class ClienteServiceImpl implements IClienteService {
     public void delete(Long id) {
         clienteDao.deleteById(id);
 
+    }
+
+    @Override
+    public List<Producto> findByNombre(String term) {
+        return null;
+    }
+
+    @Override
+    public void saveFactura(Factura factura) {
+
+    }
+
+    @Override
+    public Producto findProductoById(long id) {
+        return null;
+    }
+
+    @Override
+    public Factura findFacturaById(Long id) {
+        return null;
     }
 }

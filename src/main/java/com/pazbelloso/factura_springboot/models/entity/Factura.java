@@ -29,6 +29,59 @@ public class Factura {
     @JoinColumn(name = "factura_id")
     private List<ItemFactura> items;
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ItemFactura> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemFactura> items) {
+        this.items = items;
+    }
+
+    public Double getTotal() {
+
+        Double total = 0.0;
+
+        int size = items.size();
+
+        for (int i = 0; i< size; i++){
+            total += items.get(i).calcularImporte();
+        }
+        return total;
+    }
+
+    private static final Long serialVersionUID = 1L;
     @PrePersist
     public void prePersist(){
         createAt=new Date();
@@ -43,5 +96,9 @@ public class Factura {
 
     public Long getId() {
         return id;
+    }
+
+    public void addItemFactura(ItemFactura item) {
+        this.items.add(item);
     }
 }
