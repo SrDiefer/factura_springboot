@@ -45,8 +45,7 @@ public class ClienteController {
             e.printStackTrace();
         }
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; " +
-                        "filename=\"" + recurso.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"")
                 .body(recurso);
     }
 
@@ -72,7 +71,7 @@ public class ClienteController {
 
         Page<Cliente> clientes = clienteService.findAll(pageRequest);
 
-        PageRender<Cliente> pageRender = new PageRender<Cliente>("/listar", clientes);
+        PageRender<Cliente> pageRender = new PageRender<>("/listar", clientes);
         model.addAttribute("titulo", "Listado de clientes");
         model.addAttribute("clientes", clientes);
         model.addAttribute("page", pageRender);

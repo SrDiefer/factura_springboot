@@ -1,6 +1,8 @@
 package com.pazbelloso.factura_springboot.models.service;
 
 import com.pazbelloso.factura_springboot.models.dao.IClienteDao;
+import com.pazbelloso.factura_springboot.models.dao.IFacturaDao;
+import com.pazbelloso.factura_springboot.models.dao.IProductoDao;
 import com.pazbelloso.factura_springboot.models.entity.Cliente;
 import com.pazbelloso.factura_springboot.models.entity.Factura;
 import com.pazbelloso.factura_springboot.models.entity.Producto;
@@ -18,6 +20,12 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Autowired
     private IClienteDao clienteDao;
+
+    @Autowired
+    private IFacturaDao facturaDao;
+
+    @Autowired
+    private IProductoDao productoDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -50,22 +58,34 @@ public class ClienteServiceImpl implements IClienteService {
     }
 
     @Override
+    @Transactional
     public List<Producto> findByNombre(String term) {
-        return null;
+        return productoDao.findByNombreLikeIgnoreCase("%" + term + "%");
     }
 
     @Override
+    @Transactional
     public void saveFactura(Factura factura) {
+        facturaDao.save(factura);
 
     }
 
     @Override
+    @Transactional
     public Producto findProductoById(long id) {
-        return null;
+        return productoDao.findById(id).orElse(null);
     }
 
     @Override
+    @Transactional
     public Factura findFacturaById(Long id) {
-        return null;
+        return facturaDao.findById(id).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public void deleteFactura(long id) {
+        facturaDao.deleteById(id);
+
     }
 }

@@ -1,6 +1,7 @@
 package com.pazbelloso.factura_springboot.models.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,8 +15,10 @@ public class Factura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     private String descripcion;
 
+    @NotEmpty
     private String observacion;
 
     @Temporal(TemporalType.DATE)

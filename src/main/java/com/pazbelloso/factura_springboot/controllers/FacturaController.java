@@ -116,6 +116,6 @@ public class FacturaController {
             return "redirect:/ver/" + factura.getCliente().getId();
         }
         flash.addFlashAttribute("error", "La factura no existe en la base de datos, no se pudo eliminar!");
-        return "redirec:/listar";
+        return "redirect:/listar";
     }
 }
